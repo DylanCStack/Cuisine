@@ -59,6 +59,13 @@
         }
 
         function save(){
+
+            $all_restaurants = Restaurant::getAll();
+            foreach ($all_restaurants as $restaurant) {
+                if(strtolower($restaurant->getName()) == strtolower($this->name)){
+                    return false;
+                }
+            }
             $GLOBALS['DB']->exec("INSERT INTO restaurant (name, address, website, phone, cuisine_id) VALUES ('{$this->getName()}', '{$this->address}', '{$this->website}', '{$this->phone}', {$this->cuisine_id} )");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
@@ -95,6 +102,10 @@
             return $restaurants;
         }
 
+        static function deleteAllByCuisine($search_id){
+            $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE cuisine_id = {$search_id};");
+        }
+
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM restaurant;");
         }
@@ -114,6 +125,24 @@
 
             }
             return $returned_restaurant;
+        }
+
+        static function findByName($search_name)
+        {
+            $found_restaurants = Restaurant::getAll();
+            $returned_restaurant = null;
+
+            foreach($found_restaurants as $restaurant)
+            {
+                $new_restaurant = $restaurant->getname();
+
+                if($search_name == $new_restaurant){
+                    $returned_restaurant = $restaurant;
+                }
+
+            }
+            return $returned_restaurant;
+        }
         }
 
     }
