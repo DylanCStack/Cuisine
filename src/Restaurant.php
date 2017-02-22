@@ -143,7 +143,7 @@
             }
             return $returned_restaurant;
         }
-        }
+        
 
     }
 

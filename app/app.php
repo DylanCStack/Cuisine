@@ -46,8 +46,29 @@
         $id = $cuisine->getId();
         $restaurant = new Restaurant($_POST['restaurant'], $_POST['address'], $_POST['website'], $_POST['phone'], $id);
         $restaurant->save();
-        
+
         return $app['twig']->render("cuisine.html.twig", array("restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine));
+    });
+
+    $app->get("/restaurant/{cuisine}/{name}", function($cuisine, $name) use ($app)
+    {
+        $restaurant = Restaurant::findByName($name);
+        $id = $restaurant->getId();
+
+        $reviews = Review::getAllByRestaurant($id);
+        return $app['twig']->render("restaurant.html.twig", array("restaurant" => $restaurant, "reviews"=>$reviews, "cuisine"=>$cuisine));
+    });
+
+    $app->post("/restaurant/{cuisine}/{name}", function($cuisine, $name) use ($app)
+    {
+        $restaurant = Restaurant::findByName($name);
+        $id = $restaurant->getId();
+
+        $review = new Review($_POST['review_text'], $_POST['score_input'], $id);
+        $review->save();
+
+        $reviews = Review::getAllByRestaurant($id);
+        return $app['twig']->render("restaurant.html.twig", array("restaurant" => $restaurant, "reviews"=>$reviews, "cuisine"=>$cuisine));
     });
 
     $app->post("/deleteAll", function() use ($app)
@@ -63,6 +84,16 @@
         Restaurant::deleteAllByCuisine($id);
 
         return $app['twig']->render("cuisine.html.twig", array("restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine));
+    });
+
+    $app->post("/deleteAllReviewByRestaurant/{id}", function($id) use ($app)
+    {
+        $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        $reviews = Review::getAllByRestaurant($restaurant->getId());
+        Review::deleteAllByRestaurant($id);
+
+        return $app->redirect("/restaurant/{$cuisine->getName()}/{$restaurant->getName()}");
     });
 
 

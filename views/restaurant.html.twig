@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Cuisine Finder</title>
+    </head>
+    <body>
+        <h1>Cuisine Finder</h1>
+        {%if restaurant is not empty%}
+        <h2>{{restaurant.getName}}</h2>
+        <ul>
+            <li>{{restaurant.getAddress}}</li>
+            <li><a href="{{restaurant.getWebsite}}">{{restaurant.getWebsite}}</a></li>
+            <li>{{restaurant.getPhone}}</li>
+        </ul>
+        {%endif%}
+        <form class="restaurant" action="/restaurant/{{cuisine}}/{{restaurant.getName}}" method="post">
+            <h3>Submit a Review</h3>
+            <label for="score_input">Score</label>
+            <input type="number" min="1" max="5" name = "score_input">
+
+            <textarea cols="100" rows="7" name="review_text" placeholder="Enter your Review here"></textarea>
+
+            <button type = "submit">Add</button>
+        </form>
+        {%if reviews is not empty%}
+        <ul>
+            {% for review in reviews %}
+            <li>Score: {{review.getScore}}</li>
+            <li>Review: {{review.getReview}}</li>
+            {%endfor%}
+        </ul>
+        {%endif%}
+        <form class="restaurant" action="/deleteAllReviewByRestaurant/{{restaurant.getId}}" method="post">
+            <button type = "submit">Delete all Reviews</button>
+        </form>
+
+    </body>
+</html>

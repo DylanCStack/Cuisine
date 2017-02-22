@@ -10,7 +10,7 @@
         {%if restaurants is not empty%}
             <ul>
             {% for restaurant in restaurants %}
-                <li><a href='/restaurant/{{restaurant.getName}}'>{{restaurant.getName}}</a></li>
+                <li><a href='/restaurant/{{cuisine.getName}}/{{restaurant.getName}}'>{{restaurant.getName}}</a></li>
             {%endfor%}
             </ul>
         {%endif%}

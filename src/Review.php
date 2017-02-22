@@ -85,22 +85,26 @@
             $GLOBALS['DB']->exec("DELETE FROM review;");
         }
 
-        // static function find($search_id)
-        // {
-        //     $found_restaurants = Review::getAll();
-        //     $returned_restaurant = null;
-        //
-        //     foreach($found_restaurants as $restaurant)
-        //     {
-        //         $new_restaurant = $restaurant->getId();
-        //
-        //         if($search_id == $new_restaurant){
-        //             $returned_restaurant = $restaurant;
-        //         }
-        //
-        //     }
-        //     return $returned_restaurant;
-        // }
+        static function deleteAllByRestaurant($search_id){
+            $GLOBALS['DB']->exec("DELETE FROM review WHERE restaurant_id = {$search_id};");
+        }
+
+        static function find($search_id)
+        {
+            $found_reviews = Review::getAll();
+            $returned_review = null;
+
+            foreach($found_reviews as $review)
+            {
+                $new_review = $review->getId();
+
+                if($search_id == $new_review){
+                    $returned_review = $review;
+                }
+
+            }
+            return $returned_review;
+        }
 
     }
 
