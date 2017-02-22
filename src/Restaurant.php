@@ -79,6 +79,22 @@
             return $restaurants;
         }
 
+        static function getAllByCuisine($search_id){
+            $found_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurant WHERE cuisine_id = {$search_id};");
+            $restaurants = array();
+            foreach ($found_restaurants as $restaurant) {
+                $restaurant_type = $restaurant['name'];
+                $restaurant_address = $restaurant['address'];
+                $restaurant_website = $restaurant['website'];
+                $restaurant_phone = $restaurant['phone'];
+                $restaurant_cuisine = $restaurant['cuisine_id'];
+                $restaurant_id = $restaurant['id'];
+                $new_restaurant = new Restaurant($restaurant_type, $restaurant_address, $restaurant_website, $restaurant_phone, $restaurant_cuisine, $restaurant_id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM restaurant;");
         }
