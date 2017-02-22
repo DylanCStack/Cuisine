@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Cuisine Finder</title>
+    </head>
+    <body>
+        <h1>Cuisine Finder</h1>
+        <h2>{{cuisine.getName}}
+        {%if restaurants is not empty%}
+            <ul>
+            {% for restaurant in restaurants %}
+                <li><a href='/restaurant/{{restaurant.getName}}'>{{restaurant.getName}}</a></li>
+            {%endfor%}
+            </ul>
+        {%endif%}
+        <form class="restaurant" action="/cuisine/{{cuisine.getName}}" method="post">
+            <label for="restaurant">Add a new restaurant</label>
+            <input type="text" name = "restaurant">
+
+            <button type = "submit">Add</button>
+        </form>
+        <form class="restaurant" action="/deleteAll" method="post">
+            <button type = "submit">Purge</button>
+        </form>
+
+    </body>
+</html>

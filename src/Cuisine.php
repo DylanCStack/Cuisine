@@ -23,6 +23,12 @@
         }
 
         function save(){
+            $all_cuisines = Cuisine::getAll();
+            foreach ($all_cuisines as $cuisine) {
+                if(strtolower($cuisine->getName()) == strtolower($this->name)){
+                    return false;
+                }
+            }
             $GLOBALS['DB']->exec("INSERT INTO cuisine (name) VALUES ('{$this->getName()}')");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
@@ -53,6 +59,23 @@
                 $new_cuisine = $cuisine->getId();
 
                 if($search_id == $new_cuisine){
+                    $returned_cuisine = $cuisine;
+                }
+
+            }
+            return $returned_cuisine;
+        }
+
+        static function findByName($search_name)
+        {
+            $found_cuisines = Cuisine::getAll();
+            $returned_cuisine = null;
+
+            foreach($found_cuisines as $cuisine)
+            {
+                $new_cuisine = $cuisine->getname();
+
+                if($search_name == $new_cuisine){
                     $returned_cuisine = $cuisine;
                 }
 

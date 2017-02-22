@@ -49,6 +49,10 @@
             $this->setScore($score_update);
         }
 
+        function delete(){
+            $GLOBALS['DB']->exec("DELETE FROM review WHERE id = {$this->getId()};");
+        }
+
         static function getAll(){
             $found_reviews = $GLOBALS['DB']->query("SELECT * FROM review;");
             $reviews = array();
