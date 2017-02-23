@@ -2,26 +2,52 @@
 <html>
     <head>
         <meta charset="utf-8">
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-Xqcy5ttufkC3rBa8EdiAyA1VgOGrmel2Y+wxm4K3kI3fcjTWlDWrlnxyD6hOi3PF" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <title>Cuisine Finder</title>
     </head>
     <body>
-        <h1>Cuisine Finder</h1>
-        {%if cuisines is not empty%}
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/">Home</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <h1>Cuisine Finder</h1>
+            {%if cuisines is not empty%}
             <ul>
-            {% for cuisine in cuisines %}
+                {% for cuisine in cuisines %}
                 <li><a href='/cuisine/{{cuisine.getName}}'>{{cuisine.getName}}</a></li>
-            {%endfor%}
+                {%endfor%}
             </ul>
-        {%endif%}
-        <form class="cuisine" action="/" method="post">
-            <label for="cuisine">Add a new cuisine</label>
-            <input type="text" name = "cuisine">
+            {%endif%}
+            <form class="form-group cuisine" action="/" method="post">
+                <label for="cuisine">Add a new cuisine</label>
+                <input type="text" name = "cuisine">
 
-            <button type = "submit">Add</button>
-        </form>
-        <form class="cuisine" action="/deleteAll" method="post">
-            <button type = "submit">Purge</button>
-        </form>
+                <button type = "submit" class="btn btn-success">Add</button>
+            </form>
+            <form class="cuisine" action="/deleteAll" method="post">
+                <button type = "submit" class="btn btn-warning">Purge</button>
+            </form>
+        </div>
 
     </body>
 </html>
