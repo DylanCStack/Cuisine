@@ -24,7 +24,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cuisines <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    {% if cuisines is not empty %} 
+                                    {% if cuisines is not empty %}
                                         {% for cuisine in cuisines %}
                                             <li><a href='/cuisine/{{cuisine.getName}}'>{{cuisine.getName}}</a></li>
                                         {% endfor %}
@@ -76,11 +76,15 @@
                     <tr>
                       <td>{{count}}</td>
                       <td><a href='/cuisine/{{cuisine.getName}}'>{{cuisine.getName}}</a></td>
-                      <td><button type="button" class="btn btn-xs btn-warning cuisine-edit" value="{{cuisine.getId}}">Edit</button>
-                      <form class="form-group tbl-del" action="/delete-cuisine/{{cuisine.getId}}" method="post">
-                          <input type="hidden" name="_method" value="delete">
-                          <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
-                      </form></td>
+                      {% if user is not empty %}
+                          {% if user.getAuthority == 1 %}
+                              <td><button type="button" class="btn btn-xs btn-warning cuisine-edit" value="{{cuisine.getId}}">Edit</button>
+                              <form class="form-group tbl-del" action="/delete-cuisine/{{cuisine.getId}}" method="post">
+                                  <input type="hidden" name="_method" value="delete">
+                                  <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
+                              </form></td>
+                          {% endif %}
+                      {% endif %}
                       {%endfor%}
                     </tr>
                   </tbody>
