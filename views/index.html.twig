@@ -24,21 +24,38 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cuisines <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    {% if cuisines is not empty %}
+                                    {% if cuisines is not empty %} 
                                         {% for cuisine in cuisines %}
                                             <li><a href='/cuisine/{{cuisine.getName}}'>{{cuisine.getName}}</a></li>
                                         {% endfor %}
                                     {% endif %}
                                 </ul>
                             </li>
+
                         </ul>
-                        <button type = "button" class=" purge btn btn-info" data-toggle="modal" data-target="#login-modal">Log In</button>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <li>
+                                    {% if user is not empty %}
+                                        <a href="#">{{user.getName}}</a>
+                                    {% endif %}
+                                </li>
+                            </li>
+                        </ul>
+                        {% if user is not empty %}
                         <form class="login purge cuisine" action="/logout" method="post">
                             <button type = "submit" class="btn btn-info">Log Out</button>
                         </form>
-                        <form class="purge cuisine" action="/deleteAll" method="post">
-                            <button type = "submit" class="btn btn-warning">Purge</button>
-                        </form>
+
+                            {% if user.getAuthority == 1%}
+                                <form class="purge cuisine" action="/deleteAll" method="post">
+                                    <button type = "submit" class="btn btn-warning">Purge</button>
+                                </form>
+                            {% endif %}
+                        {% else %}
+
+                            <button type = "button" class=" purge btn btn-info" data-toggle="modal" data-target="#login-modal">Log In</button>
+                        {% endif %}
                     </div>
                 </div>
             </nav>
@@ -98,10 +115,10 @@
                         <div class="modal-header">Register</div>
                         <div class="modal-body">
                             <form class="" action="/register" method="post">
-                                <label for="username">Username</label>
-                                <input class="form-control" type="type" name="username">
-                                <label for="password">Password</label>
-                                <input class="form-control" type="password" name="password">
+                                <label for="new_username">Username</label>
+                                <input class="form-control" type="type" name="new_username">
+                                <label for="new_password">Password</label>
+                                <input class="form-control" type="password" name="new_password">
 
                                 <button type = "submit" class="btn btn-success">Register</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

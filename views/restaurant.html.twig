@@ -41,15 +41,29 @@
                                 </ul>
                             </li>
                         </ul>
-                        <form class="login purge cuisine" action="/login" method="post">
-                            <button type = "submit" class="btn btn-info">Log In</button>
-                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <li>
+                                    {% if user is not empty %}
+                                        <a href="#">{{user.getName}}</a>
+                                    {% endif %}
+                                </li>
+                            </li>
+                        </ul>
+                        {% if user is not empty %}
                         <form class="login purge cuisine" action="/logout" method="post">
                             <button type = "submit" class="btn btn-info">Log Out</button>
                         </form>
-                        <form class="purge restaurant" action="/deleteAllReviewByRestaurant/{{restaurant.getId}}" method="post">
-                            <button type = "submit" class="btn btn-warning">Delete all Reviews</button>
-                        </form>
+
+                            {% if user.getAuthority == 1%}
+                                <form class="purge cuisine" action="/deleteAll" method="post">
+                                    <button type = "submit" class="btn btn-warning">Purge</button>
+                                </form>
+                            {% endif %}
+                        {% else %}
+
+                            <button type = "button" class=" purge btn btn-info" data-toggle="modal" data-target="#login-modal">Log In</button>
+                        {% endif %}
                     </div>
                 </div>
             </nav>
@@ -149,6 +163,38 @@
                 </div>
               </div>
             </form>
+            </div>
+            <!-- login modal -->
+            <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content form-group">
+                        <div class="modal-header">Sign In</div>
+                        <div class="modal-body">
+                            <form class="" action="/login" method="post">
+                                <label for="username">Username</label>
+                                <input class="form-control" type="type" name="username">
+                                <label for="password">Password</label>
+                                <input class="form-control" type="password" name="password">
+
+                                <button type = "submit" class="btn btn-success">Log In</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </form>
+                        </div>
+                        <hr>
+                        <div class="modal-header">Register</div>
+                        <div class="modal-body">
+                            <form class="" action="/register" method="post">
+                                <label for="username">Username</label>
+                                <input class="form-control" type="type" name="username">
+                                <label for="password">Password</label>
+                                <input class="form-control" type="password" name="password">
+
+                                <button type = "submit" class="btn btn-success">Register</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

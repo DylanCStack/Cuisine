@@ -4,12 +4,13 @@
     {
         private $authority;
         private $name;
+        private $password;
         private $id;
 
-        function __construct($authority, $name, $id=null){
+        function __construct($authority, $name, $password, $id=null){
             $this->authority=$authority;
             $this->name = $name;
-
+            $this->password = $password;
             $this->id=$id;
         }
 
@@ -28,6 +29,13 @@
         function getName(){
             return $this->name;
         }
+        function setPassword($password){
+            $this->password = $password;
+        }
+
+        function getPassword(){
+            return $this->password;
+        }
 
 
         function getId(){
@@ -35,7 +43,7 @@
         }
 
         function save(){
-            $GLOBALS['DB']->exec("INSERT INTO user (authority, name) VALUES ('{$this->authority}', {$this->name})");
+            $GLOBALS['DB']->exec("INSERT INTO user (authority, name, user_pw) VALUES ({$this->authority}, '{$this->name}', '{$this->password}')");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -76,6 +84,38 @@
 
             }
             return $returned_user;
+        }
+
+        static function login($username, $password)
+        {
+            $credentials = $GLOBALS['DB']->query("SELECT * FROM user;");
+            if($credentials){
+                foreach ($credentials as $user) {
+                    if($user['name'] == $username && $user['user_pw'] == $password){
+                        $new_user = new User ($user['authority'], $user['name'], $user['user_pw']);
+                        $_SESSION['user'] = $new_user;
+
+                    }
+                }
+            }
+        }
+        static function logout()
+        {
+            $_SESSION['user'] = array();
+        }
+        static function register($username, $password)
+        {
+            $credentials = $GLOBALS['DB']->query("SELECT * FROM user;");
+            if($credentials !== false){
+                foreach ($credentials as $user) {
+                    if($user['name'] == $username){
+                        return false;
+                    }
+                }
+                $new_user = new User (0, $username, $password);
+                $_SESSION['user'] = $new_user;
+                $new_user->save();
+            }
         }
 
     }

@@ -4,6 +4,7 @@
     require_once __DIR__."/../src/Restaurant.php";
     require_once __DIR__."/../src/Cuisine.php";
     require_once __DIR__."/../src/Review.php";
+    require_once __DIR__."/../src/User.php";
 
     $server = 'mysql:host=localhost:8889;dbname=cuisine_finder';
     $username = 'root';
@@ -12,7 +13,9 @@
 
     session_start();
 
-    $_SESSION['user'] = null;
+    if (empty($_SESSION['user'])) {
+    $_SESSION['user'] = array();
+}
 
     $app = new Silex\Application();
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -31,7 +34,7 @@
 
     $app->get("/" , function() use ($app)
     {
-        return $app['twig']->render("index.html.twig", array("cuisines" => Cuisine::getAll()));
+        return $app['twig']->render("index.html.twig", array("user" => $_SESSION['user'], "cuisines" => Cuisine::getAll()));
     });
 
     $app->post("/", function() use ($app)
@@ -39,18 +42,25 @@
         $new_cuisine = new Cuisine($_POST['cuisine']);
         $new_cuisine->save();
 
-        return $app['twig']->render("index.html.twig", array("cuisines" => Cuisine::getAll()));
+        return $app['twig']->render("index.html.twig", array("user" => $_SESSION['user'], "cuisines" => Cuisine::getAll()));
     });
 
     $app->post("/login" , function() use ($app)
     {
-        
+        User::login($_POST['username'], $_POST['password']);
+
+        return $app->redirect("/");
+    });
+    $app->post("/logout" , function() use ($app)
+    {
+        User::logout();
+
         return $app->redirect("/");
     });
 
     $app->post("/register" , function() use ($app)
     {
-
+        User::register($_POST['new_username'], $_POST['new_password']);
         return $app->redirect("/");
     });
 
@@ -58,7 +68,7 @@
     {
         $cuisine = Cuisine::findByName($name);
         $id = $cuisine->getId();
-        return $app['twig']->render("cuisine.html.twig", array("restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll()));
+        return $app['twig']->render("cuisine.html.twig", array("user" => $_SESSION['user'], "restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll()));
     });
 
     $app->post("/cuisine/{name}", function($name) use ($app)
@@ -68,7 +78,7 @@
         $restaurant = new Restaurant($_POST['restaurant'], $_POST['address'], $_POST['website'], $_POST['phone'], $id,1);
         $restaurant->save();
 
-        return $app['twig']->render("cuisine.html.twig", array("restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll()));
+        return $app['twig']->render("cuisine.html.twig", array("user" => $_SESSION['user'], "restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll()));
     });
 
     $app->get("/restaurant/{cuisine}/{name}", function($cuisine, $name) use ($app)
@@ -77,7 +87,7 @@
         $id = $restaurant->getId();
 
         $reviews = Review::getAllByRestaurant($id);
-        return $app['twig']->render("restaurant.html.twig", array("restaurant" => $restaurant, "reviews"=>$reviews, "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll(), "all_restaurants" => Restaurant::getAllByCuisine($restaurant->getCuisineId())));
+        return $app['twig']->render("restaurant.html.twig", array("user" => $_SESSION['user'], "restaurant" => $restaurant, "reviews"=>$reviews, "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll(), "all_restaurants" => Restaurant::getAllByCuisine($restaurant->getCuisineId())));
     });
 
     $app->post("/restaurant/{cuisine}/{name}", function($cuisine, $name) use ($app)
@@ -89,14 +99,14 @@
         $review->save();
 
         $reviews = Review::getAllByRestaurant($id);
-        return $app['twig']->render("restaurant.html.twig", array("restaurant" => $restaurant, "reviews"=>$reviews, "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll(), "all_restaurants" => Restaurant::getAllByCuisine($restaurant->getCuisineId())));
+        return $app['twig']->render("restaurant.html.twig", array("user" => $_SESSION['user'], "restaurant" => $restaurant, "reviews"=>$reviews, "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll(), "all_restaurants" => Restaurant::getAllByCuisine($restaurant->getCuisineId())));
     });
 
     $app->post("/deleteAll", function() use ($app)
     {
         Cuisine::deleteAll();
 
-        return $app['twig']->render("index.html.twig", array("cuisines" => Cuisine::getAll()));
+        return $app['twig']->render("index.html.twig", array("user" => $_SESSION['user'], "cuisines" => Cuisine::getAll()));
     });
     $app->post("/deleteAllByCuisine/{name}", function($name) use ($app)
     {
@@ -104,7 +114,7 @@
         $id = $cuisine->getId();
         Restaurant::deleteAllByCuisine($id);
 
-        return $app['twig']->render("cuisine.html.twig", array("restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll()));
+        return $app['twig']->render("cuisine.html.twig", array("user" => $_SESSION['user'], "restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll()));
     });
 
     $app->post("/deleteAllReviewByRestaurant/{id}", function($id) use ($app)
