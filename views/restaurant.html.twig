@@ -50,7 +50,7 @@
             <h1>Cuisine Finder</h1>
             {%if restaurant is not empty%}
             <div class="panel panel-info">
-                <div class="panel-heading">{{restaurant.getName}}</div>
+                <div class="panel-heading"><span>{{restaurant.getName}}</span><button class="btn btn-xs btn-warning restaurant-edit" value = "{{restaurant.getId}}">Edit</button></div> 
                 <div class="panel-body">
                     <ul>
                         <li>{{restaurant.getAddress}}</li>

@@ -130,10 +130,18 @@
     });
 
     $app->patch("/edit-cuisine/{id}", function($id) use ($app){
-        $review = Cuisine::find($id);
-        $review->update($_POST['cuisine']);
+        $cuisine = Cuisine::find($id);
+        $cuisine->update($_POST['cuisine']);
 
         return $app->redirect("/");
+    });
+
+    $app->patch("/edit-restaurant/{id}", function($id) use ($app){
+        $restaurant = Restaurant::find($id);
+        $restaurant->update($_POST['name'],$_POST['address'],$_POST['website'],$_POST['phone']);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+
+        return $app->redirect("/restaurant/{$cuisine->getName()}/{$restaurant->getName()}");
     });
 
     $app->patch("/edit-review/{id}", function($id) use ($app){

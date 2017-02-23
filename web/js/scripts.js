@@ -19,10 +19,19 @@ $(document).ready(function() {
             '<button type="submit" class="btn btn-xs btn-warning" name="button">Edit</button>' +
         '</form>')
     })
+    $(".restaurant-edit").click(function() {
+        $(this).parent().parent().html(
+        '<form class="form-group tbl-edit" action="/edit-restaurant/' + $(this).val() + '" method="post">' +
+            '<input type="hidden" name="_method" value="patch">' +
+            '<label for="name">Name</label>' +
+            '<input class="form-control" type=text name="name" value=' + $(this).prev().text() + '>' +
+            '<label for="address">Address</label>' +
+            '<input class="form-control" type=text name="address" value=' + $(this).parent().next().children("ul").children("li").first().text() + '>' +
+            '<label for="website">Website</label>' +
+            '<input class="form-control" type=text name="website" value=' + $(this).parent().next().children("ul").children("li:nth-of-type(2)").text() + '>' +
+            '<label for="phone">Phone</label>' +
+            '<input class="form-control" type=text name="phone" value=' + $(this).parent().next().children("ul").children("li").last().text() + '>' +
+            '<button type="submit" class="btn btn-xs btn-warning" name="button">Edit</button>' +
+        '</form>')
+    })
 })
-
-
-// <form class="form-group tbl-edit" action="/edit-cuisine/{{cuisine.getId}}" method="post">
-//     <input type="hidden" name="_method" value="patch">
-//     <button type="submit" class="btn btn-xs btn-warning" name="button">Edit</button>
-// </form>

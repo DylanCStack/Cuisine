@@ -76,6 +76,15 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function update($new_name, $new_address, $new_website, $new_phone)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurant SET name = '{$new_name}', address= '{$new_address}', website = '{$new_website}', phone = '{$new_phone}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+            $this->setAddress($new_address);
+            $this->setWebsite($new_website);
+            $this->setPhone($new_phone);
+        }
+
         static function getAll(){
             $found_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurant;");
             $restaurants = array();

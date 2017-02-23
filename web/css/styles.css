@@ -5,7 +5,7 @@
     border: 1px solid black;
 }
 
-.purge, .tbl-del, .cuisine-edit {
+.purge, .tbl-del, .cuisine-edit, .restaurant-edit {
     float:right;
 }
 
