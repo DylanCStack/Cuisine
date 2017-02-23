@@ -129,6 +129,13 @@
         return $app->redirect("/restaurant/{$cuisine->getName()}/{$restaurant->getName()}");
     });
 
+    $app->patch("/edit-cuisine/{id}", function($id) use ($app){
+        $review = Cuisine::find($id);
+        $review->update($_POST['cuisine']);
+
+        return $app->redirect("/");
+    });
+
     $app->patch("/edit-review/{id}", function($id) use ($app){
 
         $review = Review::find($id);
@@ -139,6 +146,8 @@
 
         return $app->redirect("/restaurant/{$cuisine->getName()}/{$restaurant->getName()}");
     });
+
+
 
     return $app;
 ?>

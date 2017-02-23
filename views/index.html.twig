@@ -55,7 +55,8 @@
                     <tr>
                       <td>{{count}}</td>
                       <td><a href='/cuisine/{{cuisine.getName}}'>{{cuisine.getName}}</a></td>
-                      <td><form class="form-group tbl-del" action="/delete-cuisine/{{cuisine.getId}}" method="post">
+                      <td><button type="button" class="btn btn-xs btn-warning cuisine-edit" value="{{cuisine.getId}}">Edit</button>
+                      <form class="form-group tbl-del" action="/delete-cuisine/{{cuisine.getId}}" method="post">
                           <input type="hidden" name="_method" value="delete">
                           <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
                       </form></td>

@@ -54,6 +54,11 @@
             $GLOBALS['DB']->exec("DELETE FROM cuisine WHERE id = {$this->id};");
         }
 
+        function update($name){
+            $GLOBALS['DB']->exec("UPDATE cuisine SET name = '{$name}' WHERE id = {$this->getId()};");
+            $this->setName($name);
+        }
+
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM cuisine;");
             $GLOBALS['DB']->exec("DELETE FROM restaurant;");
