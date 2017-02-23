@@ -32,6 +32,9 @@
                                 </ul>
                             </li>
                         </ul>
+                        <form class="purge cuisine" action="/deleteAll" method="post">
+                            <button type = "submit" class="btn btn-warning">Purge</button>
+                        </form>
                     </div>
                 </div>
             </nav>
@@ -52,7 +55,7 @@
                     <tr>
                       <td>{{count}}</td>
                       <td><a href='/cuisine/{{cuisine.getName}}'>{{cuisine.getName}}</a></td>
-                      <td><form class="form-group" action="/delete-cuisine/{{cuisine.getId}}" method="post">
+                      <td><form class="form-group tbl-del" action="/delete-cuisine/{{cuisine.getId}}" method="post">
                           <input type="hidden" name="_method" value="delete">
                           <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
                       </form></td>
@@ -68,9 +71,9 @@
 
                 <button type = "submit" class="btn btn-success">Add</button>
             </form>
-            <form class="cuisine" action="/deleteAll" method="post">
+            <!-- <form class="cuisine" action="/deleteAll" method="post">
                 <button type = "submit" class="btn btn-warning">Purge</button>
-            </form>
+            </form> -->
         </div>
 
     </body>

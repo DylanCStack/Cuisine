@@ -32,6 +32,9 @@
                                 </ul>
                             </li>
                         </ul>
+                        <form class="purge restaurant" action="/deleteAllByCuisine/{{cuisine.getName}}" method="post">
+                            <button type = "submit" class="btn btn-warning">Purge</button>
+                        </form>
                     </div>
                 </div>
             </nav>
@@ -52,7 +55,7 @@
                 <tr>
                   <td>{{count}}</td>
                   <td><a href='/restaurant/{{cuisine.getName}}/{{restaurant.getName}}'>{{restaurant.getName}}</a></td>
-                  <td><form class="form-group" action="/delete-restaurant/{{restaurant.getId}}" method="post">
+                  <td><form class="form-group tbl-del" action="/delete-restaurant/{{restaurant.getId}}" method="post">
                       <input type="hidden" name="_method" value="delete">
                       <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
                   </form></td>
@@ -66,9 +69,9 @@
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form-modal">
               Add Restaurant
             </button>
-            <form class="restaurant" action="/deleteAllByCuisine/{{cuisine.getName}}" method="post">
+            <!-- <form class="restaurant" action="/deleteAllByCuisine/{{cuisine.getName}}" method="post">
                 <button type = "submit" class="btn btn-warning">Purge</button>
-            </form>
+            </form> -->
 
             <!-- form modal -->
             <div class="modal fade" id="form-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

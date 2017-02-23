@@ -41,6 +41,9 @@
                                 </ul>
                             </li>
                         </ul>
+                        <form class="purge restaurant" action="/deleteAllReviewByRestaurant/{{restaurant.getId}}" method="post">
+                            <button type = "submit" class="btn btn-warning">Delete all Reviews</button>
+                        </form>
                     </div>
                 </div>
             </nav>
@@ -76,10 +79,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Score:
                         <span class="score">{{review.getScore}}</span>
-                        <button type="button" class="btn btn-success edit-button" data-toggle="modal" data-target="#edit-review" value="{{review.getId}}">
+                        <button type="button" class="btn btn-success btn-xs edit-button" data-toggle="modal" data-target="#edit-review" value="{{review.getId}}">
                           Edit Review
                         </button>
-                        <button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#delete-review" value="{{review.getId}}">
+                        <button type="button" class="btn btn-danger btn-xs delete-button" data-toggle="modal" data-target="#delete-review" value="{{review.getId}}">
                           Delete Review
                         </button>
                     </div>
@@ -88,9 +91,9 @@
                 {%endfor%}
 
             {%endif%}
-            <form class="restaurant" action="/deleteAllReviewByRestaurant/{{restaurant.getId}}" method="post">
+            <!-- <form class="restaurant" action="/deleteAllReviewByRestaurant/{{restaurant.getId}}" method="post">
                 <button type = "submit" class="btn btn-warning">Delete all Reviews</button>
-            </form>
+            </form> -->
 
             <!-- Edit Modal -->
             <div class="modal fade" id="edit-review" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
