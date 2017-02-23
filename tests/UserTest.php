@@ -19,6 +19,7 @@
             Restaurant::deleteAll();
             Cuisine::deleteAll();
             Review::deleteAll();
+            User::deleteAll();
         }
 
         function test_save()

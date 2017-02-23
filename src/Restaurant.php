@@ -116,6 +116,7 @@
 
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM restaurant;");
+            $GLOBALS['DB']->exec("DELETE FROM review;");
         }
 
         static function find($search_id)

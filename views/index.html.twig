@@ -33,9 +33,28 @@
             <h1>Cuisine Finder</h1>
             {%if cuisines is not empty%}
             <ul>
-                {% for cuisine in cuisines %}
-                <li><a href='/cuisine/{{cuisine.getName}}'>{{cuisine.getName}}</a></li>
-                {%endfor%}
+                <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Cuisine Options:</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% set count = 0 %}
+                      {% for cuisine in cuisines %}
+                      {% set count = count + 1%}
+                    <tr>
+                      <td>{{count}}</td>
+                      <td><a href='/cuisine/{{cuisine.getName}}'>{{cuisine.getName}}</a></td>
+                      <td><form class="form-group" action="/delete-cuisine/{{cuisine.getId}}" method="post">
+                          <input type="hidden" name="_method" value="delete">
+                          <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
+                      </form></td>
+                      {%endfor%}
+                    </tr>
+                  </tbody>
+                </table>
             </ul>
             {%endif%}
             <form class="form-group cuisine" action="/" method="post">

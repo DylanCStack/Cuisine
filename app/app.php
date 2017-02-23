@@ -101,6 +101,14 @@
         return $app->redirect("/restaurant/{$cuisine->getName()}/{$restaurant->getName()}");
     });
 
+    $app->delete("/delete-cuisine/{id}", function($id) use ($app){
+
+        $cuisine = Cuisine::find($id);
+        $cuisine->delete();
+
+        return $app->redirect("/");
+    });
+
     $app->delete("/delete-review/{id}", function($id) use ($app){
 
         $review = Review::find($id);

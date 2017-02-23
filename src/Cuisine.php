@@ -45,8 +45,19 @@
             return $cuisines;
         }
 
+        function delete(){
+            $restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurant WHERE cuisine_id = {$this->id};");
+            foreach($restaurants as $restaurant){
+                $GLOBALS['DB']->exec("DELETE FROM review WHERE restaurant_id = {$restaurant['id']};");
+            }
+            $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE cuisine_id = {$this->id};");
+            $GLOBALS['DB']->exec("DELETE FROM cuisine WHERE id = {$this->id};");
+        }
+
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM cuisine;");
+            $GLOBALS['DB']->exec("DELETE FROM restaurant;");
+            $GLOBALS['DB']->exec("DELETE FROM review;");
         }
 
         static function find($search_id)
