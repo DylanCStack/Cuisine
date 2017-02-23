@@ -7,14 +7,16 @@
         private $website;
         private $phone;
         private $cuisine_id;
+        private $user_id;
         private $id;
 
-        function __construct($name, $address, $website, $phone, $cuisine_id, $id=null){
+        function __construct($name, $address, $website, $phone, $cuisine_id, $user_id, $id=null){
             $this->name=$name;
             $this->address = $address;
             $this->website = $website;
             $this->phone = $phone;
             $this->cuisine_id = $cuisine_id;
+            $this->user_id = $user_id;
             $this->id=$id;
         }
 
@@ -54,6 +56,10 @@
             return $this->cuisine_id;
         }
 
+        function getUserId(){
+            return $this->user_id;
+        }
+
         function getId(){
             return $this->id;
         }
@@ -66,7 +72,7 @@
                     return false;
                 }
             }
-            $GLOBALS['DB']->exec("INSERT INTO restaurant (name, address, website, phone, cuisine_id) VALUES ('{$this->getName()}', '{$this->address}', '{$this->website}', '{$this->phone}', {$this->cuisine_id} )");
+            $GLOBALS['DB']->exec("INSERT INTO restaurant (name, address, website, phone, cuisine_id, user_id) VALUES ('{$this->getName()}', '{$this->address}', '{$this->website}', '{$this->phone}', {$this->cuisine_id}, {$this->user_id} )");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -79,8 +85,9 @@
                 $restaurant_website = $restaurant['website'];
                 $restaurant_phone = $restaurant['phone'];
                 $restaurant_cuisine = $restaurant['cuisine_id'];
+                $restaurant_user = $restaurant['user_id'];
                 $restaurant_id = $restaurant['id'];
-                $new_restaurant = new Restaurant($restaurant_type, $restaurant_address, $restaurant_website, $restaurant_phone, $restaurant_cuisine, $restaurant_id);
+                $new_restaurant = new Restaurant($restaurant_type, $restaurant_address, $restaurant_website, $restaurant_phone, $restaurant_cuisine, $restaurant_user, $restaurant_id);
                 array_push($restaurants, $new_restaurant);
             }
             return $restaurants;
@@ -95,8 +102,9 @@
                 $restaurant_website = $restaurant['website'];
                 $restaurant_phone = $restaurant['phone'];
                 $restaurant_cuisine = $restaurant['cuisine_id'];
+                $restaurant_user = $restaurant['user_id'];
                 $restaurant_id = $restaurant['id'];
-                $new_restaurant = new Restaurant($restaurant_type, $restaurant_address, $restaurant_website, $restaurant_phone, $restaurant_cuisine, $restaurant_id);
+                $new_restaurant = new Restaurant($restaurant_type, $restaurant_address, $restaurant_website, $restaurant_phone, $restaurant_cuisine, $restaurant_user, $restaurant_id);
                 array_push($restaurants, $new_restaurant);
             }
             return $restaurants;
@@ -143,7 +151,7 @@
             }
             return $returned_restaurant;
         }
-        
+
 
     }
 

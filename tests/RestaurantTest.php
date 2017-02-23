@@ -32,7 +32,7 @@
             $restaurant_phone = "123-456-7890";
             $restaurant_cuisine = $cuisine1->getId();
 
-            $restaurant = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine);
+            $restaurant = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine, 1);
             // Act
             $restaurant->save();
 
@@ -54,7 +54,7 @@
             $restaurant_phone = "123-456-7890";
             $restaurant_cuisine = $cuisine1->getId();
 
-            $restaurant1 = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine);
+            $restaurant1 = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine, 1);
             $restaurant1->save();
 
             $cuisine_type2 = "Chinese";
@@ -67,7 +67,7 @@
             $restaurant2_website = "BambooExpress.ninja";
             $restaurant2_phone = "123-456-7890";
             $restaurant2_cuisine = $cuisine2->getId();
-            $restaurant2 = new Restaurant($restaurant2_name,$restaurant2_address,$restaurant2_website, $restaurant2_phone, $restaurant2_cuisine);
+            $restaurant2 = new Restaurant($restaurant2_name,$restaurant2_address,$restaurant2_website, $restaurant2_phone, $restaurant2_cuisine, 1);
             $restaurant2->save();
 
             //Assert

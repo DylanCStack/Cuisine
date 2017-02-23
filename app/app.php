@@ -49,7 +49,7 @@
     {
         $cuisine= Cuisine::findByName($name);
         $id = $cuisine->getId();
-        $restaurant = new Restaurant($_POST['restaurant'], $_POST['address'], $_POST['website'], $_POST['phone'], $id);
+        $restaurant = new Restaurant($_POST['restaurant'], $_POST['address'], $_POST['website'], $_POST['phone'], $id,1);
         $restaurant->save();
 
         return $app['twig']->render("cuisine.html.twig", array("restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine));
@@ -69,7 +69,7 @@
         $restaurant = Restaurant::findByName($name);
         $id = $restaurant->getId();
 
-        $review = new Review($_POST['review_text'], $_POST['score_input'], $id);
+        $review = new Review($_POST['review_text'], $_POST['score_input'], $id,1);
         $review->save();
 
         $reviews = Review::getAllByRestaurant($id);
@@ -115,7 +115,7 @@
     $app->patch("/edit-review/{id}", function($id) use ($app){
 
         $review = Review::find($id);
-        $review->update($_POST['review_text'], $_POST['score_input']);
+        $review->update($_POST['review_text'], $_POST['score_input'],1);
 
         $restaurant = Restaurant::find($review->getRestaurantId());
         $cuisine = Cuisine::find($restaurant->getCuisineId());

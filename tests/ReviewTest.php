@@ -34,14 +34,14 @@
             $restaurant_phone = "123-456-7890";
             $restaurant_cuisine = $cuisine1->getId();
 
-            $restaurant = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine);
+            $restaurant = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine, 1);
             $restaurant->save();
 
             $review_text = "Test Test 1/5 poor service";
             $score = 1;
             $review_restaurant_id = $restaurant->getId();
 
-            $review = new Review($review_text, $score, $review_restaurant_id);
+            $review = new Review($review_text, $score, $review_restaurant_id, 1);
             // Act
             $review->save();
             //Assert
@@ -62,14 +62,14 @@
             $restaurant_phone = "123-456-7890";
             $restaurant_cuisine = $cuisine1->getId();
 
-            $restaurant1 = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine);
+            $restaurant1 = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine, 1);
             $restaurant1->save();
 
             $review1_text = "Test Test 1/5 poor service";
             $score1 = 1;
             $review1_restaurant_id = $restaurant1->getId();
 
-            $review1 = new Review($review1_text, $score1, $review1_restaurant_id);
+            $review1 = new Review($review1_text, $score1, $review1_restaurant_id, 3);
             $review1->save();
 
 
@@ -84,14 +84,14 @@
             $restaurant2_phone = "123-456-7890";
             $restaurant2_cuisine = $cuisine2->getId();
 
-            $restaurant2 = new Restaurant($restaurant2_name,$restaurant2_address,$restaurant2_website, $restaurant2_phone, $restaurant2_cuisine);
+            $restaurant2 = new Restaurant($restaurant2_name,$restaurant2_address,$restaurant2_website, $restaurant2_phone, $restaurant2_cuisine, 1);
             $restaurant2->save();
 
             $review2_text = "Test Test 2/5 poor service";
             $score2 = 2;
             $review2_restaurant_id = $restaurant2->getId();
 
-            $review2 = new Review($review2_text, $score2, $review2_restaurant_id);
+            $review2 = new Review($review2_text, $score2, $review2_restaurant_id, 2);
             $review2->save();
 
             //Assert
@@ -112,14 +112,14 @@
             $restaurant_phone = "123-456-7890";
             $restaurant_cuisine = $cuisine1->getId();
 
-            $restaurant = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine);
+            $restaurant = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine, 1);
             $restaurant->save();
 
             $review_text = "Test Test 1/5 poor service";
             $score = 1;
             $review_restaurant_id = $restaurant->getId();
 
-            $review = new Review($review_text, $score, $review_restaurant_id);
+            $review = new Review($review_text, $score, $review_restaurant_id, 1);
             $review->save();
 
             $review_text_update = "NVM WE ALL GOOD";
@@ -145,14 +145,14 @@
             $restaurant_phone = "123-456-7890";
             $restaurant_cuisine = $cuisine1->getId();
 
-            $restaurant1 = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine);
+            $restaurant1 = new Restaurant($restaurant_name,$restaurant_address,$restaurant_website, $restaurant_phone, $restaurant_cuisine, 1);
             $restaurant1->save();
 
             $review1_text = "Test Test 1/5 poor service";
             $score1 = 1;
             $review1_restaurant_id = $restaurant1->getId();
 
-            $review1 = new Review($review1_text, $score1, $review1_restaurant_id);
+            $review1 = new Review($review1_text, $score1, $review1_restaurant_id, 3);
             $review1->save();
 
 
@@ -167,14 +167,14 @@
             $restaurant2_phone = "123-456-7890";
             $restaurant2_cuisine = $cuisine2->getId();
 
-            $restaurant2 = new Restaurant($restaurant2_name,$restaurant2_address,$restaurant2_website, $restaurant2_phone, $restaurant2_cuisine);
+            $restaurant2 = new Restaurant($restaurant2_name,$restaurant2_address,$restaurant2_website, $restaurant2_phone, $restaurant2_cuisine, 1);
             $restaurant2->save();
 
             $review2_text = "Test Test 2/5 poor service";
             $score2 = 2;
             $review2_restaurant_id = $restaurant2->getId();
 
-            $review2 = new Review($review2_text, $score2, $review2_restaurant_id);
+            $review2 = new Review($review2_text, $score2, $review2_restaurant_id, 2);
             $review2->save();
 
             //Act

@@ -5,12 +5,14 @@
         private $review;
         private $score;
         private $restaurant_id;
+        private $user_id;
         private $id;
 
-        function __construct($review, $score, $restaurant_id, $id=null){
+        function __construct($review, $score, $restaurant_id, $user_id, $id=null){
             $this->review=$review;
             $this->score = $score;
             $this->restaurant_id = $restaurant_id;
+            $this->user_id = $user_id;
             $this->id=$id;
         }
 
@@ -34,12 +36,16 @@
             return $this->restaurant_id;
         }
 
+        function getUserId(){
+            return $this->user_id;
+        }
+
         function getId(){
             return $this->id;
         }
 
         function save(){
-            $GLOBALS['DB']->exec("INSERT INTO review (review, score, restaurant_id) VALUES ('{$this->review}', {$this->score}, {$this->restaurant_id})");
+            $GLOBALS['DB']->exec("INSERT INTO review (review, score, restaurant_id, user_id) VALUES ('{$this->review}', {$this->score}, {$this->restaurant_id}, {$this->user_id})");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -60,8 +66,9 @@
                 $review_text = $review['review'];
                 $review_score = $review['score'];
                 $review_restaurant_id = $review['restaurant_id'];
+                $review_user_id = $review['user_id'];
                 $review_id = $review['id'];
-                $new_review = new Review($review_text, $review_score, $review_restaurant_id, $review_id);
+                $new_review = new Review($review_text, $review_score, $review_restaurant_id, $review_user_id, $review_id);
                 array_unshift($reviews, $new_review);
             }
             return $reviews;
@@ -74,8 +81,9 @@
                 $review_text = $review['review'];
                 $review_score = $review['score'];
                 $review_restaurant_id = $review['restaurant_id'];
+                $review_user_id = $review['user_id'];
                 $review_id = $review['id'];
-                $new_review = new Review($review_text, $review_score, $review_restaurant_id, $review_id);
+                $new_review = new Review($review_text, $review_score, $review_restaurant_id, $review_user_id, $review_id);
                 array_unshift($reviews, $new_review);
             }
             return $reviews;
