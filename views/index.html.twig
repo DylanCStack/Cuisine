@@ -32,6 +32,10 @@
                                 </ul>
                             </li>
                         </ul>
+                        <button type = "button" class=" purge btn btn-info" data-toggle="modal" data-target="#login-modal">Log In</button>
+                        <form class="login purge cuisine" action="/logout" method="post">
+                            <button type = "submit" class="btn btn-info">Log Out</button>
+                        </form>
                         <form class="purge cuisine" action="/deleteAll" method="post">
                             <button type = "submit" class="btn btn-warning">Purge</button>
                         </form>
@@ -72,9 +76,42 @@
 
                 <button type = "submit" class="btn btn-success">Add</button>
             </form>
-            <!-- <form class="cuisine" action="/deleteAll" method="post">
-                <button type = "submit" class="btn btn-warning">Purge</button>
-            </form> -->
+
+
+            <!-- login modal -->
+            <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content form-group">
+                        <div class="modal-header">Sign In</div>
+                        <div class="modal-body">
+                            <form class="" action="/login" method="post">
+                                <label for="username">Username</label>
+                                <input class="form-control" type="type" name="username">
+                                <label for="password">Password</label>
+                                <input class="form-control" type="password" name="password">
+
+                                <button type = "submit" class="btn btn-success">Log In</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </form>
+                        </div>
+                        <hr>
+                        <div class="modal-header">Register</div>
+                        <div class="modal-body">
+                            <form class="" action="/register" method="post">
+                                <label for="username">Username</label>
+                                <input class="form-control" type="type" name="username">
+                                <label for="password">Password</label>
+                                <input class="form-control" type="password" name="password">
+
+                                <button type = "submit" class="btn btn-success">Register</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
     </body>

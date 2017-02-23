@@ -41,6 +41,7 @@
 
         function delete(){
             $GLOBALS['DB']->exec("DELETE FROM user WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM review WHERE user_id = {$this->getId()};");
         }
 
         static function getAll(){

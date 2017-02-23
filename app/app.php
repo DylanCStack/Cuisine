@@ -9,7 +9,11 @@
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
+
     session_start();
+
+    $_SESSION['user'] = null;
+
     $app = new Silex\Application();
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
@@ -36,6 +40,18 @@
         $new_cuisine->save();
 
         return $app['twig']->render("index.html.twig", array("cuisines" => Cuisine::getAll()));
+    });
+
+    $app->post("/login" , function() use ($app)
+    {
+        
+        return $app->redirect("/");
+    });
+
+    $app->post("/register" , function() use ($app)
+    {
+
+        return $app->redirect("/");
     });
 
     $app->get("/cuisine/{name}", function($name) use ($app)

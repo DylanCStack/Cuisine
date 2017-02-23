@@ -32,6 +32,12 @@
                                 </ul>
                             </li>
                         </ul>
+                        <form class="login purge cuisine" action="/login" method="post">
+                            <button type = "submit" class="btn btn-info">Log In</button>
+                        </form>
+                        <form class="login purge cuisine" action="/logout" method="post">
+                            <button type = "submit" class="btn btn-info">Log Out</button>
+                        </form>
                         <form class="purge restaurant" action="/deleteAllByCuisine/{{cuisine.getName}}" method="post">
                             <button type = "submit" class="btn btn-warning">Purge</button>
                         </form>
