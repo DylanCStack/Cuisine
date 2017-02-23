@@ -112,5 +112,16 @@
         return $app->redirect("/restaurant/{$cuisine->getName()}/{$restaurant->getName()}");
     });
 
+    $app->patch("/edit-review/{id}", function($id) use ($app){
+
+        $review = Review::find($id);
+        $review->update($_POST['review_text'], $_POST['score_input']);
+
+        $restaurant = Restaurant::find($review->getRestaurantId());
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+
+        return $app->redirect("/restaurant/{$cuisine->getName()}/{$restaurant->getName()}");
+    });
+
     return $app;
 ?>
