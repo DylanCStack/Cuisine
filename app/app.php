@@ -15,7 +15,9 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
-    $app['cookie_lifetime']=0;
+    $app['session.storage.options'] = [
+    'cookie_lifetime' => 0
+    ];
     // $_SESSION['test']= "session is still live";
 
     $app['debug'] = true;
@@ -25,8 +27,6 @@
 
     $app->get("/" , function() use ($app)
     {
-
-        echo $_SESSION['test'];
         return $app['twig']->render("index.html.twig", array("cuisines" => Cuisine::getAll()));
     });
 
@@ -101,6 +101,16 @@
         return $app->redirect("/restaurant/{$cuisine->getName()}/{$restaurant->getName()}");
     });
 
+    $app->delete("/delete-review/{id}", function($id) use ($app){
+
+        $review = Review::find($id);
+        $review->delete();
+
+        $restaurant = Restaurant::find($review->getRestaurantId());
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+
+        return $app->redirect("/restaurant/{$cuisine->getName()}/{$restaurant->getName()}");
+    });
 
     return $app;
 ?>

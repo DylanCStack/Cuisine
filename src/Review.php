@@ -62,7 +62,7 @@
                 $review_restaurant_id = $review['restaurant_id'];
                 $review_id = $review['id'];
                 $new_review = new Review($review_text, $review_score, $review_restaurant_id, $review_id);
-                array_push($reviews, $new_review);
+                array_unshift($reviews, $new_review);
             }
             return $reviews;
         }
@@ -76,7 +76,7 @@
                 $review_restaurant_id = $review['restaurant_id'];
                 $review_id = $review['id'];
                 $new_review = new Review($review_text, $review_score, $review_restaurant_id, $review_id);
-                array_push($reviews, $new_review);
+                array_unshift($reviews, $new_review);
             }
             return $reviews;
         }
