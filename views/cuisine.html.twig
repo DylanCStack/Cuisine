@@ -35,7 +35,12 @@
             {%if restaurants is not empty%}
                 <ul>
                 {% for restaurant in restaurants %}
-                    <li><a href='/restaurant/{{cuisine.getName}}/{{restaurant.getName}}'>{{restaurant.getName}}</a></li>
+                    <li><a href='/restaurant/{{cuisine.getName}}/{{restaurant.getName}}'>{{restaurant.getName}}</a>
+                        <form class="form-group" action="/delete-restaurant/{{restaurant.getId}}" method="post">
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
+                        </form>
+                    </li>
                 {%endfor%}
                 </ul>
             {%endif%}

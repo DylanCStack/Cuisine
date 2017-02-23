@@ -110,6 +110,12 @@
             return $restaurants;
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE id = {$this->id};");
+            $GLOBALS['DB']->exec("DELETE FROM review WHERE restaurant_id = {$this->id};");
+        }
+
         static function deleteAllByCuisine($search_id){
             $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE cuisine_id = {$search_id};");
         }
