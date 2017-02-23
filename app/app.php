@@ -9,11 +9,14 @@
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
-
+    session_start();
     $app = new Silex\Application();
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
+
+    $app['cookie_lifetime']=0;
+    // $_SESSION['test']= "session is still live";
 
     $app['debug'] = true;
 
@@ -22,6 +25,8 @@
 
     $app->get("/" , function() use ($app)
     {
+
+        echo $_SESSION['test'];
         return $app['twig']->render("index.html.twig", array("cuisines" => Cuisine::getAll()));
     });
 
