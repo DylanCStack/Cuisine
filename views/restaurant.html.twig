@@ -72,7 +72,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading"><span>{{restaurant.getName}}</span>
                     {% if user is not empty %}
-                        {% if user.getAuthority == 1 %}
+                        {% if user.getAuthority == 1 or restaurant.getUserId == user.getId %}
                         <button class="btn btn-xs btn-warning restaurant-edit" value = "{{restaurant.getId}}">Edit</button>
                         {% endif %}
                     {% endif %}
