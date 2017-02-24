@@ -74,7 +74,7 @@
                   {% set count = count + 1%}
                 <tr>
                   <td>{{count}}</td>
-                  <td><a href='/restaurant/{{cuisine.getName}}/{{restaurant.getName}}'>{{restaurant.getName}}</a></td>
+                  <td><a href='/restaurant/{{cuisine.getName}}/{{restaurant.getName}}'>{{restaurant.getName | upper}}</a></td>
                   {% if user is not empty %}
                       {% if user.getAuthority == 1 %}
                       <td><form class="form-group tbl-del" action="/delete-restaurant/{{restaurant.getId}}" method="post">

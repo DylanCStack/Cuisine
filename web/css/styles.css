@@ -13,3 +13,7 @@
     float: right;
     margin-left: 1%;
 }
+td {
+    font-size: 16px;
+    letter-spacing: 1px;
+}
