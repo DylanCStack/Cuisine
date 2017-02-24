@@ -75,7 +75,7 @@
     {
         $cuisine= Cuisine::findByName($name);
         $id = $cuisine->getId();
-        $restaurant = new Restaurant($_POST['restaurant'], $_POST['address'], $_POST['website'], $_POST['phone'], $id,1);
+        $restaurant = new Restaurant($_POST['restaurant'], $_POST['address'], $_POST['website'], $_POST['phone'], $id, $_SESSION['user']->getId());
         $restaurant->save();
 
         return $app['twig']->render("cuisine.html.twig", array("user" => $_SESSION['user'], "restaurants" => Restaurant::getAllByCuisine($id), "cuisine"=>$cuisine, "all_cuisines"=>Cuisine::getAll()));
@@ -95,7 +95,7 @@
         $restaurant = Restaurant::findByName($name);
         $id = $restaurant->getId();
 
-        $review = new Review($_POST['review_text'], $_POST['score_input'], $id,1);
+        $review = new Review($_POST['review_text'], $_POST['score_input'], $id, $_SESSION['user']->getId());
         $review->save();
 
         $reviews = Review::getAllByRestaurant($id);

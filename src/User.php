@@ -92,7 +92,7 @@
             if($credentials){
                 foreach ($credentials as $user) {
                     if($user['name'] == $username && $user['user_pw'] == $password){
-                        $new_user = new User ($user['authority'], $user['name'], $user['user_pw']);
+                        $new_user = new User ($user['authority'], $user['name'], $user['user_pw'], $user['id']);
                         $_SESSION['user'] = $new_user;
 
                     }
@@ -113,8 +113,8 @@
                     }
                 }
                 $new_user = new User (0, $username, $password);
-                $_SESSION['user'] = $new_user;
                 $new_user->save();
+                $_SESSION['user'] = $new_user;
             }
         }
 

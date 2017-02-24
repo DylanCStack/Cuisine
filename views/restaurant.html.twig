@@ -106,7 +106,7 @@
                     <div class="panel-heading">Score:
                         <span class="score">{{review.getScore}}</span>
                         {% if user is not empty %}
-                            {% if user.getAuthority == 1 %}
+                            {% if user.getAuthority == 1 or review.getUserId == user.getId %}
                         <button type="button" class="btn btn-success btn-xs edit-button" data-toggle="modal" data-target="#edit-review" value="{{review.getId}}">
                           Edit Review
                         </button>
