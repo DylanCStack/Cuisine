@@ -1,8 +1,8 @@
-#Cuisine Finder
-##Authored by Dylan Stackhouse and Matt Kelley
-#Description
+# Cuisine Finder
+## Authored by Dylan Stackhouse and Matt Kelley
+# Description
 A website where a user can input a type of cuisine they wish to eat and they will be presented with all of the restaurants nearby which serve that cuisine. The user may also look up a restaurant and leave a review for other users.
-#Specifications
+# Specifications
 1. The user inputs a cuisine type. Said cuisine is then added into the list of available cuisines.
 2. The user inputs a restaurant. Said restaurant is then added into the list of available restaurant in it's specified cuisine.
 3. The user clicks a cuisine from the list of cuisines. User is then redirected to a page that lists all the available restaurants in that cuisine.
